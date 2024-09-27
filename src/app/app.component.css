@@ -1,0 +1,64 @@
+/* Container styling */
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  /* Heading styling */
+  h2 {
+    text-align: center;
+    color: #4a90e2;
+    font-family: 'Arial', sans-serif;
+    margin-bottom: 30px;
+  }
+  
+  /* Form group styling */
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  /* Label styling */
+  label {
+    font-weight: bold;
+    color: #333;
+    font-size: 1rem;
+  }
+  
+  /* Input and select styling */
+  input[type="text"],
+  input[type="number"],
+  input[type="date"],
+  textarea,
+  select {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-top: 5px;
+    background-color: #fff;
+    color: #333;
+  }
+  
+  input[type="text"]:focus,
+  input[type="number"]:focus,
+  input[type="date"]:focus,
+  textarea:focus,
+  select:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 4px rgba(74, 144, 226, 0.5);
+  }
+  
+  /* Textarea styling */
+  textarea {
+    height: 120px;
+    resize: vertical;
+  }
+  
+ 
+  

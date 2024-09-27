@@ -1,0 +1,104 @@
+<div class="container">
+  <h2>Student Feedback Form</h2>
+
+  <!-- Feedback Form -->
+  <form (ngSubmit)="onSubmit()" #feedbackForm="ngForm">
+
+    <!-- Student Name Input -->
+    <div class="form-group">
+      <label for="name">Student Name:</label>
+      <input type="text" id="name" required [(ngModel)]="feedback.studentName" name="studentName" #studentName="ngModel" class="form-control">
+      <div *ngIf="studentName.invalid && studentName.touched" class="text-danger">
+        Student Name is required
+      </div>
+    </div>
+
+    <!-- Batch Number Input -->
+    <div class="form-group">
+      <label for="batch">Batch Number:</label>
+      <input type="number" id="batch" required [(ngModel)]="feedback.batchNumber" name="batchNumber" #batchNumber="ngModel" class="form-control">
+      <div *ngIf="batchNumber.invalid && batchNumber.touched" class="text-danger">
+        Batch Number is required
+      </div>
+    </div>
+
+     <!-- Gender Selection -->
+     <div class="form-group">
+      <label for="gender">Gender:</label>
+      <select id="gender" [(ngModel)]="feedback.gender" name="gender" class="form-control" (change)="calculateAge()">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+
+     <!-- Date of Birth Input -->
+     <div class="form-group">
+      <label for="dob">Date of Birth:</label>
+      <input type="date" id="dob" [(ngModel)]="feedback.dateOfBirth" name="dateOfBirth" (change)="calculateAge()" class="form-control">
+    </div>
+
+    <!-- Feedback Textarea -->
+    <div class="form-group">
+      <label for="feedbackText">Feedback:</label>
+      <textarea id="feedbackText" required [(ngModel)]="feedback.feedbackText" name="feedbackText" #feedbackText="ngModel" class="form-control"></textarea>
+      <div *ngIf="feedbackText.invalid && feedbackText.touched" class="text-danger">
+        Feedback is required
+      </div>
+    </div>
+
+
+
+    <!-- Rating Input -->
+    <div class="form-group">
+      <label for="rating">Rate Us:</label>
+      <select [(ngModel)]="feedback.rating" name="rating" id="rating" class="form-control">
+        <option value="1">1 - Poor</option>
+        <option value="2">2 - Fair</option>
+        <option value="3">3 - Good</option>
+        <option value="4">4 - Very Good</option>
+        <option value="5">5 - Excellent</option>
+      </select>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary" [disabled]="feedbackForm.invalid">Submit</button>
+  </form>
+
+  <!-- Search Box -->
+  <div class="form-group mt-4">
+    <input type="text" placeholder="Search by Student Name or Batch" [(ngModel)]="searchText" class="form-control" />
+  </div>
+
+  <!-- Display Submitted Feedback -->
+  <h3>Submitted Feedback</h3>
+  <table class="table table-bordered" *ngIf="submittedFeedback.length > 0">
+    <thead>
+      <tr>
+        <th>Student Name</th>
+        <th>Batch Number</th>
+        <th>Gender</th>
+        <th>Date of Birth</th>
+        <th>Age</th>
+        <th>Feedback</th>
+        <th>Rating</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let entry of submittedFeedback | filter:searchText; let i = index">
+        <td>{{ entry.gender === 'female' ? 'Ms.' : (entry.gender === 'male' ? 'Mr.' : 'Mx.')}} {{ entry.studentName }}</td>
+        <td>{{ entry.batchNumber }}</td>
+        <td>{{ entry.gender }}</td>
+        <td>{{ entry.dateOfBirth | date: 'mediumDate' }}</td>
+        <td>{{ entry.age }}</td>
+        <td>{{ entry.feedbackText }}</td>
+        <td>{{ entry.rating }} / 5</td>
+        <td>
+          <button class="btn btn-warning btn-sm" (click)="editFeedback(i)">Edit</button>
+          <button class="btn btn-danger btn-sm" (click)="deleteFeedback(i)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
